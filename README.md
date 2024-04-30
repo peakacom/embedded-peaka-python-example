@@ -2,7 +2,7 @@
 
 Sample python project to demonstrate Embedded Peaka UI integration and Peaka SQLAlchemy client usage.
 Project has backend and frontend implementations. Backend is implemented using Flask framework. Backend
-makes API calls to Peaka Partner API. You can check the Partner API details from Peaka [Documentation](https://docs.peaka.com/api-reference/introduction)
+makes API calls to Peaka Partner API. You can check the Partner API details from Peaka [Documentation.](https://docs.peaka.com/api-reference/introduction)
 Frontend is implemented with vite, react, tailwind and radix-ui.
 
 You need to run backend and frontend together. Here is how you can do the setup for both of them:
