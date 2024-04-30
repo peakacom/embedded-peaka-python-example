@@ -87,19 +87,19 @@ def connect():
 @cross_origin()
 def get_data():
     try:
-        apiKey = request.json.get("apiKey", None)
-        catalogName = request.json.get("catalogName", None)
-        schemaName = request.json.get("schemaName", None)
-        tableName = request.json.get("tableName", None)
+        api_key = request.json.get("apiKey", None)
+        catalog_name = request.json.get("catalogName", None)
+        schema_name = request.json.get("schemaName", None)
+        table_name = request.json.get("tableName", None)
 
         headers = {
-            "Authorization": f"Bearer {apiKey}",
+            "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
         }
 
         # Get SQLAlchemy connection string from partner api
         r = requests.get(
-            f"{PEAKA_PARTNER_API_BASE_URL}/supportedDrivers/sql_alchemy?catalogName={catalogName}",
+            f"{PEAKA_PARTNER_API_BASE_URL}/supportedDrivers/sql_alchemy?catalogName={catalog_name}",
             headers=headers,
         )
         response = r.json()
@@ -110,8 +110,8 @@ def get_data():
         connection = engine.connect()
 
         nodes = Table(
-            tableName,
-            MetaData(schema=schemaName),
+            table_name,
+            MetaData(schema=schema_name),
             peaka_autoload=True,
             autoload_with=engine,
         )
