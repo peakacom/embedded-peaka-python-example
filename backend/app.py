@@ -63,24 +63,39 @@ def create_peaka_project():
 @cross_origin()
 def connect():
     try:
-        apiKey = request.json.get("apiKey", None)
+        # project API keys not working, using partner API key for now
+        #apiKey = request.json.get("apiKey", None)
+        apiKey = PEAKA_PARTNER_API_KEY
+        projectId = request.json.get("projectId", None)
 
         headers = {
             "Authorization": f"Bearer {apiKey}",
             "Content-Type": "application/json",
         }
+        payload = {
+            "timeoutInSeconds": 300,
+            "projectId": projectId,
+            "theme": "dark",
+            "themeOverride": False,
+            "featureFlags": {
+                "createDataInPeaka": True,
+                "queries": False
+            }
+        }
 
         # Get session url from partner api
-        r = requests.get(
-            f"{PEAKA_PARTNER_API_BASE_URL}/ui/initSession",
+        r = requests.request(
+            "POST",
+            url=f"{PEAKA_PARTNER_API_BASE_URL}/ui/initSession",
             headers=headers,
+            json=payload,
         )
         response = r.json()
         session_url = response["sessionUrl"]
 
         return jsonify(sessionUrl=session_url)
-    except:
-        return "There was an issue when connecting peaka."
+    except Exception as e:
+        return jsonify(error=str(e), projectAPIKey=apiKey, projectId=projectId, response=response)
 
 
 @app.route("/get-data", methods=["POST"])
