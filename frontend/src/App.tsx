@@ -16,6 +16,7 @@ function App() {
   const [isFetching, setIsFetching] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [projectAPIKey, setProjectAPIKey] = useState("");
+  const [projectId, setProjectId] = useState("");
   const [catalogName, setCatalogName] = useState("");
   const [schemaName, setSchemaName] = useState("");
   const [tableName, setTableName] = useState("");
@@ -36,6 +37,7 @@ function App() {
             const respJSON = await response.json();
             setProjectAPIKey(respJSON.projectApiKey);
             setProjectName(respJSON.projectName);
+            setProjectId(respJSON.projectId);
             setStep(1);
             setIsFetching(false);
           }
@@ -58,6 +60,10 @@ function App() {
               <Text>Project API Key</Text>
               <TextField.Root size="3" disabled value={projectAPIKey} />
             </Box>
+            <Box maxWidth="300px">
+              <Text>Project ID</Text>
+              <TextField.Root size="3" disabled value={projectId} />
+            </Box>
             <div className="mt-6">
               <Button
                 disabled={isFetching}
@@ -65,6 +71,7 @@ function App() {
                   setIsFetching(true);
                   const data = {
                     apiKey: projectAPIKey,
+                    projectId: projectId,
                   };
                   const response = await fetch(`${BASE_URL}/connect`, {
                     method: "POST",
