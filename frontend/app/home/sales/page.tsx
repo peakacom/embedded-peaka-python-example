@@ -12,7 +12,7 @@ export default function Page() {
 
   useEffect(() => {
     const data = {
-      projectId: process.env.NEXT_PUBLIC_MARKETING_APP_PROJECT_ID,
+      projectId: process.env.NEXT_PUBLIC_SALES_APP_PROJECT_ID,
       theme: theme,
       themeOverride: false
     };
