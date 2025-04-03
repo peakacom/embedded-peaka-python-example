@@ -8,6 +8,8 @@ import requests
 from sqlalchemy import create_engine
 from sqlalchemy.schema import Table, MetaData
 from sqlalchemy.sql.expression import select
+from functools import wraps
+import time
 
 load_dotenv()
 
@@ -22,6 +24,42 @@ auth_header = {
     "Authorization": f"Bearer {PEAKA_PARTNER_API_KEY}",
     "Content-Type": "application/json",
 }
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.headers.get("Authorization")
+
+        # Token kontrolü
+        if not token or not token.startswith("Bearer fake-token-"):
+            return jsonify({"message": "Geçersiz veya eksik token"}), 403
+
+        return f(*args, **kwargs)
+
+    return decorated
+
+USERS = [
+    {"username": "admin", "password": "admin", "role": "admin"},
+    {"username": "user", "password": "user", "role": "user"}
+]
+
+@app.route("/api/login", methods=["POST"])
+@cross_origin()
+def login():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+
+    # Find user
+    user = next((u for u in USERS if u["username"] == username and u["password"] == password), None)
+
+    if not user:
+        return jsonify({"message": "Wrong username or password"}), 401
+
+    # Create fake token
+    token = f"fake-token-{int(time.time())}"
+
+    return jsonify({"token": token, "role": user["role"]})
 
 
 @app.route("/create-peaka-project", methods=["GET"])
@@ -61,15 +99,24 @@ def create_peaka_project():
 
 @app.route("/connect", methods=["POST"])
 @cross_origin()
+@token_required
 def connect():
     try:
-        # project API keys not working, using partner API key for now
-        #apiKey = request.json.get("apiKey", None)
-        apiKey = PEAKA_PARTNER_API_KEY
-        projectId = request.json.get("projectId", None)
-
+        role = request.headers.get("role")
+        data = request.get_json()
+        projectId = data.get("projectId")
+        theme = data.get("theme")
+        themeOverride = data.get("themeOverride")
+        featureFlags = {
+            "createDataInPeaka": False
+        }
+        if role == "user":
+            featureFlags["queries"] = False
+        else:
+            featureFlags["queries"] = True
+        
         headers = {
-            "Authorization": f"Bearer {apiKey}",
+            "Authorization": f"Bearer {PEAKA_PARTNER_API_KEY}",
             "Content-Type": "application/json",
         }
         payload = {
@@ -84,18 +131,23 @@ def connect():
         }
 
         # Get session url from partner api
-        r = requests.request(
-            "POST",
-            url=f"{PEAKA_PARTNER_API_BASE_URL}/ui/initSession",
+        r = requests.post(
+            f"{PEAKA_PARTNER_API_BASE_URL}/ui/initSession",
+            json={
+                "theme": theme,
+                "themeOverride": themeOverride,
+                "projectId": projectId,
+                "featureFlags": featureFlags
+            },
             headers=headers,
             json=payload,
         )
         response = r.json()
         session_url = response["sessionUrl"]
 
-        return jsonify(sessionUrl=session_url)
+        return jsonify(sessionUrl=session_url, partnerOrigin=response["partnerOrigin"])
     except Exception as e:
-        return jsonify(error=str(e), projectAPIKey=apiKey, projectId=projectId, response=response)
+        return f"There was an issue when connecting peaka. {e}"
 
 
 @app.route("/get-data", methods=["POST"])
