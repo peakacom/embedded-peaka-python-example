@@ -45,6 +45,19 @@ Open a terminal go into frontend folder.
 cd frontend
 ```
 
+Copy the environment file example file:
+
+```bash
+cp .env.example .env
+```
+
+Enter project ids to connect with Embedded UI
+
+```bash
+NEXT_PUBLIC_SALES_APP_PROJECT_ID=<PROJECT_ID>
+NEXT_PUBLIC_MARKETING_APP_PROJECT_ID=<PROJECT_ID>
+```
+
 Install dependencies using npm then start project with commands below.
 
 ```bash
