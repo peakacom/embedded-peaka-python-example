@@ -32,7 +32,7 @@ def token_required(f):
 
         # Token kontrolü
         if not token or not token.startswith("Bearer fake-token-"):
-            return jsonify({"message": "Geçersiz veya eksik token"}), 403
+            return jsonify({"message": "Invalid Token"}), 403
 
         return f(*args, **kwargs)
 
