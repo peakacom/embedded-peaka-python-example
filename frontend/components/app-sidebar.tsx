@@ -20,7 +20,7 @@ import { usePathname } from "next/dist/client/components/navigation"
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const path = usePathname();
   console.log("path", path)
-  const [data, setData] = React.useState({
+  const [data] = React.useState({
     navMain: [
       {
         title: "Sales",
@@ -31,6 +31,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         title: "Marketing",
         url: "/home/marketing",
         isActive: path === "/home/marketing",
+      },
+      {
+        title: "Connectors",
+        url: "/home/connectors",
+        isActive: path === "/home/connectors",
       },
     ],
   })

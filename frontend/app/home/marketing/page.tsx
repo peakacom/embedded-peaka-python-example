@@ -29,7 +29,6 @@ export default function Page() {
 
   useEffect(() => {
     if (iframeRef.current) {
-      debugger;
       iframeRef.current?.contentWindow?.postMessage(
         {
           theme: theme,
@@ -38,7 +37,7 @@ export default function Page() {
         partnerOrigin
       );
     }
-  }, [partnerOrigin, theme]);
+  }, [partnerOrigin, theme, iframeRef.current]);
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">

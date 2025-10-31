@@ -155,6 +155,12 @@ def connect():
         feature_flags = {
             "createDataInPeaka": False
         }
+        connector_type: str = data.get("connectorType")
+        catalog_create_enabled: bool = data.get("catalogCreateEnabled")
+        feature_configs = {
+            "displayedConnectorTypes": [],
+        }
+        
         if role == "user":
             feature_flags["queries"] = False
         else:
@@ -164,16 +170,25 @@ def connect():
             "Authorization": f"Bearer {PEAKA_PARTNER_API_KEY}",
             "Content-Type": "application/json",
         }
+        
+        body_obj = {
+            "theme": theme,
+            "themeOverride": theme_override,
+            "projectId": project_id,
+            "featureFlags": feature_flags,
+            "sessionMode": "CONNECTOR_MODAL_ONLY" if connector_type else "FULL_STUDIO"
+        }
+        
+        if connector_type:
+            body_obj["connectorType"] = connector_type
+            body_obj["catalogCreateEnabled"] = catalog_create_enabled
+        else:
+            body_obj["featureConfigs"] = feature_configs
 
         # Get session url from partner api
         r = requests.post(
             f"{PEAKA_PARTNER_API_BASE_URL}/ui/initSession",
-            json={
-                "theme": theme,
-                "themeOverride": theme_override,
-                "projectId": project_id,
-                "featureFlags": feature_flags
-            },
+            json=body_obj,
             headers=headers,
             timeout=5
         )

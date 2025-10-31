@@ -1,0 +1,174 @@
+*{
+  --absolute-white: #ffffff;
+  /* primary colors */
+  --primary-base: #f05f5f;
+  --primary-hover: #cd5454;
+  --primary-dark: #853636;
+  --primary-light: #f9bcbc;
+  --primary-lighter: #fcdada;
+  /* secondary colors */
+  --secondary-base: #be9abd;
+  --secondary-hover: #66445c;
+  --secondary-dark: #4c2d48;
+  --secondary-light: #ebe3ea;
+  --secondary-lighter: #eef0f3;
+  /* informative colors */
+  --information-base: #3bf6f6;
+  --information-hover: #32d197;
+  --information-dark: #29ac9b;
+  --information-light: #abf3fb;
+  --information-lighter: #d0fdf4;
+  /* warning colors */
+  --warning-base: #f97316;
+  --warning-hover: #ea580c;
+  --warning-dark: #c2410c;
+  --warning-light: #fed7aa;
+  --warning-lighter: #ffedd5;
+  /* error colors */
+  --error-base: #ef4444;
+  --error-hover: #dc2626;
+  --error-dark: #b91c1c;
+  --error-light: #fecaca;
+  --error-lighter: #fee2e2;
+  /* success colors */
+  --success-base: #22c55e;
+  --success-hover: #16a34a;
+  --success-dark: #15803d;
+  --success-light: #bbf7d0;
+  --success-lighter: #dcfce7;
+  /* neutral colors */
+  --neutral-base: #9aa4be;
+  --neutral-hover: #444d66;
+  --neutral-dark: #2d354c;
+  --neutral-light: #e3e6eb;
+  --neutral-lighter: #eef0f3;
+  /* updating colors */
+  --updating-base: #14b8a6;
+  --updating-hover: #0e8174;
+  --updating-dark: #0b655b;
+  --updating-light: #9ae0d9;
+  --updating-lighter: #c7eeea;
+  /* text colors */
+  --link-text-color: #f3f4f6;
+  --link-text-hover-color: #ffffff;
+  --header-color: #f9fafb;
+  --text-primary-color: #cfd1d7;
+  --text-secondary-color: #e5e7eb;
+  --text-label-color: #cfd1d7;
+  --text-disabled-color: #555659;
+  --text-placeholder-color: #75777a;
+  /* border colors */
+  --border-active-color: #f3f4f6;
+  --border-primary-strong-color: #555659;
+  --border-primary-color: #3f4043;
+  --border-strong-color: #f9fafb;
+  --border-soft-color: #141415;
+  --border-secondary-color: #27282a;
+  --border-soft-secondary-color: #27282a;
+  --border-error-color: #ef4444;
+  --border-success-color: #22c55e;
+  --border-warning-color: #f97316;
+  --border-information-color: #3b82f6;
+  --border-neutral-color: #9aa4be;
+  /* background colors */
+  --background-default: #0d0d0d;
+  --background-primary: #141415;
+  --background-secondary: #1d1e1f;
+  --background-tertiary: #27282a;
+  --background-offline: #3f4043;
+  /* font family */
+  --font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  /* basic sizes */
+  --size-sm: 1.75rem;
+  --size-md: 2.25rem;
+  --size-lg: 2.75rem;
+  --size-xl: 3.25rem;
+  /* paddings */
+  --padding-none: 0;
+  --padding-3xs: 0.125rem;
+  --padding-2xs: 0.25rem;
+  --padding-xs: 0.375rem;
+  --padding-sm: 0.5rem;
+  --padding-md: 0.625rem;
+  --padding-lg: 0.75rem;
+  --padding-xl: 1rem;
+  --padding-2xl: 1.5rem;
+  --padding-3xl: 2rem;
+  --padding-4xl: 2.5rem;
+  --padding-5xl: 3rem;
+  /* radius' */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+  /* heading font sizes */
+  --heading-xxs-size: 0.75rem;
+  --heading-xs-size: 0.875rem;
+  --heading-sm-size: 1rem;
+  --heading-md-size: 1.25rem;
+  --heading-lg-size: 1.5rem;
+  --heading-xl-size: 1.75rem;
+  --heading-xxl-size: 2.25rem;
+  --heading-xxs-line-height: 1rem;
+  --heading-xs-line-height: 1.125rem;
+  --heading-sm-line-height: 1.25rem;
+  --heading-md-line-height: 1.5rem;
+  --heading-lg-line-height: 1.75rem;
+  --heading-xl-line-height: 2rem;
+  --heading-xxl-line-height: 2.5rem;
+  /* label font sizes */
+  --label-xs-size: 0.625rem;
+  --label-sm-size: 0.75rem;
+  --label-md-size: 0.875rem;
+  --label-lg-size: 1rem;
+  --label-xl-size: 1.25rem;
+  --label-xs-line-height: 0.75rem;
+  --label-sm-line-height: 0.875rem;
+  --label-md-line-height: 1rem;
+  --label-lg-line-height: 1.125rem;
+  --label-xl-line-height: 1.375rem;
+  /* body font sizes */
+  --body-xs-size: 0.625rem;
+  --body-sm-size: 0.75rem;
+  --body-md-size: 0.875rem;
+  --body-lg-size: 1rem;
+  --body-xl-size: 1.25rem;
+  --body-xs-line-height: 0.875rem;
+  --body-sm-line-height: 1rem;
+  --body-md-line-height: 1.25rem;
+  --body-lg-line-height: 1.5rem;
+  --body-xl-line-height: 1.875rem;
+  /* font-weights */
+  --font-thin: 100;
+  --font-extralight: 200;
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  --font-black: 900;
+  /* shadows */
+  --shadow-sm: 0 8px 16px 0 rgba(71, 74, 79, 0.12);
+  --shadow-md: 0 8px 12px 0 rgba(26, 27, 28, 0.16);
+  --shadow-lg: 0 4px 16px 0 rgba(69, 72, 74, 0.24);
+  --shadow-xl: 0 8px 12px 0 rgba(42, 44, 49, 0.36);
+  --tooltip-shadow: 0 2px 2px 0 rgba(59, 59, 59, 0.22);
+  --input-shadow: 0 0 0 3px #27282a;
+  --avatar-shadow: inset 0 -4px 8px 0 rgba(31, 34, 38, 0.2);
+  --border-shadow: 0 0 1px 0 rgba(90, 90, 107, 0.64);
+  /* gradients */
+  --gradient-01: linear-gradient(180deg, #2c3271 0%, #5a1f9d 100%);
+  --gradient-02: linear-gradient(180deg, #e265de 0%, #33cbb2 100%);
+  --gradient-03: linear-gradient(180deg, #208be2 0%, #3838bd 100%);
+  --gradient-04: linear-gradient(180deg, #111111 0%, #333333 100%);
+  --gradient-05: linear-gradient(180deg, #000b58 0%, #9b7ebd 100%);
+  --gradient-06: linear-gradient(360deg, #0d92f4 0%, #00ff9c 100%);
+  --gradient-07: linear-gradient(180deg, #ff6500 0%, #6256ca 96%);
+  --gradient-08: linear-gradient(360deg, #00712d 0%, #86ab89 100%);
+  --gradient-09: linear-gradient(180deg, #ffa62f 0%, #f97300 100%);
+  --gradient-10: linear-gradient(360deg, #8576ff 0%, #bc7fcd 100%);
+}
